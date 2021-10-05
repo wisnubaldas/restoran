@@ -9,6 +9,8 @@
 - Petugas survey merekap data-data survey untuk laporan survey produk baru
 
 > Bahasa yang digunakan PHP, Javascript dan CSS 
+
 > Framework yang digunakan Laravel sebagai backend,
 > dan Vue Js sebagai frontend nya
+
 > Proses devlopment nya masih menggunakan metode watherfall, (mengumpulkan data, interview client dan membuat flowchart activity diagram, class diagram, use case diagram)
