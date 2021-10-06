@@ -1,6 +1,6 @@
 ## Restoran
 
-## Question
+## Answer
 > Aplikasi Survey Produk Baru Keramik
 - Petugas survey membuat survey produk baru
 - Data survey ditampilkan di depo-depo untuk di proses
