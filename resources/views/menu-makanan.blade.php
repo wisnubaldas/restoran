@@ -40,7 +40,9 @@
                             </small>
                             <small>{{Str::limit($v->desc, 50)}}</small>
                             <div class="input-group mb-3">
-                                <input type="number" id="jml-pesan" value="0" data-item="{{$v->id}}" class="form-control rounded-0" placeholder="Jumlah pesanan">
+                                <input type="number" id="jml-pesan" value="0" 
+                                    data-idItem="{{$v->id}}" data-nama="{{$v->name}}" data-harga="{{$v->price}}"
+                                    class="form-control rounded-0" placeholder="Jumlah pesanan">
                                 <span class="input-group-append">
                                   <button type="button" class="btn btn-info btn-flat btn-pesan">Pesan {{$v->name}}</button>
                                 </span>
@@ -75,7 +77,9 @@
                 {
                     let orderan = {
                         jml_order:order.val(),
-                        menu_id:order.data('item')
+                        menu_id:order.data('idItem'),
+                        harga:order.data('harga'),
+                        nama:order.data('nama')
                     }
                     let sessOrder = sessionStorage.getItem('order')
                     if(!sessOrder)
