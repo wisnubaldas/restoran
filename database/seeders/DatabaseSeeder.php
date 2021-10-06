@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             // OrderStatusSeeder::class,
             ProductCategorySeeder::class,
             RolePermissionSeeder::class,
+            MejaSeeder::class,
         ]);
     }
 }

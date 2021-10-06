@@ -27,11 +27,11 @@ class OrderStatusSeeder extends Seeder
                 'code'=>'PC'
             ],
             [
-                'name'=>'Pesanan Diantar'
+                'name'=>'Pesanan Diantar',
                 'code'=>'PD',
             ],
             [
-                'name'=>'Pesanan Telah Diterima'
+                'name'=>'Pesanan Telah Diterima',
                 'code'=>'PE'
             ]
         ];

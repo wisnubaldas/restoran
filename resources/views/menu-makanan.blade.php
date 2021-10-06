@@ -6,7 +6,10 @@
 <h1 class="m-0 text-dark">Menu Pesanan
     <div class="btn-group">
         <a href="/home" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-circle-left"></i> Back</a>
-        <a href="#" class="btn bg-gradient-success btn-sm"><i class="fas fa-hamburger"></i> Liat Pesanan</a>
+        <a href="/menu/lihat-pesanan" class="btn bg-gradient-success btn-sm"><i class="fas fa-hamburger"></i> 
+            Liat Pesanan 
+            <span class="badge badge-light">0</span>
+        </a>
     </div>
 </h1>
 
@@ -14,7 +17,6 @@
 
 @section('content')
 <div class="row">
-    
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -38,9 +40,9 @@
                             </small>
                             <small>{{Str::limit($v->desc, 50)}}</small>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control rounded-0" placeholder="Jumlah pesanan">
+                                <input type="number" id="jml-pesan" value="0" data-item="{{$v->id}}" class="form-control rounded-0" placeholder="Jumlah pesanan">
                                 <span class="input-group-append">
-                                  <button type="button" class="btn btn-info btn-flat">Pesan {{$v->name}}</button>
+                                  <button type="button" class="btn btn-info btn-flat btn-pesan">Pesan {{$v->name}}</button>
                                 </span>
                             </div>
                         </div>
@@ -52,3 +54,42 @@
     </div>
 </div>
 @stop
+
+@section('js')
+    <script>
+        let cekOrder = function()
+        {
+            const cc = JSON.parse(sessionStorage.getItem('order'))
+            if(cc)
+            {
+                $('.badge-light').html(cc.length)
+            }
+        }
+
+        $(document).ready(function(){
+            cekOrder()
+
+            $('.btn-pesan').on('click',function(a){
+                const order = $(this).parent().parent().find('input');
+                if(order.val() !== '0')
+                {
+                    let orderan = {
+                        jml_order:order.val(),
+                        menu_id:order.data('item')
+                    }
+                    let sessOrder = sessionStorage.getItem('order')
+                    if(!sessOrder)
+                    {
+                        sessionStorage.setItem("order", JSON.stringify([orderan]));
+                        cekOrder()
+                    }else{
+                        obj = JSON.parse(sessOrder);
+                        obj.push(orderan)
+                        sessionStorage.setItem("order", JSON.stringify(obj));
+                        cekOrder()
+                    }
+                }
+            })
+        })
+    </script>
+@endsection

@@ -29,7 +29,15 @@ class HomeController extends Controller
     }
     public function menu($category)
     {
+        if($category == 'lihat-pesanan')
+        {
+            return $this->lihat_pesanan();
+        }
         $menuMakanan = $this->getMenuByCategory($category);
         return view('menu-makanan',compact('menuMakanan'));
+    }
+    public function lihat_pesanan()
+    {
+        return view('lihat-pesanan');
     }
 }
