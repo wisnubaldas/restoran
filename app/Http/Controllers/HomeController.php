@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Lib\LibTrait;
 class HomeController extends Controller
 {
     /**
@@ -11,6 +11,7 @@ class HomeController extends Controller
      *
      * @return void
      */
+    use LibTrait;
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,6 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $category =  $this->getCategory();
+        return view('home',compact('category'));
+    }
+    public function menu($category)
+    {
+        if($category == 'lihat-pesanan')
+        {
+            return $this->lihat_pesanan();
+        }
+        $menuMakanan = $this->getMenuByCategory($category);
+        return view('menu-makanan',compact('menuMakanan'));
+    }
+    public function lihat_pesanan()
+    {
+        return view('lihat-pesanan');
     }
 }

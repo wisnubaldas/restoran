@@ -20,9 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::get('/menu/{category}',[App\Http\Controllers\HomeController::class, 'menu']);
+Route::get('/menu/lihat-pesanan',[App\Http\Controllers\HomeController::class, 'lihat_pesanan']);
