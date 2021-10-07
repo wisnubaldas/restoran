@@ -5,14 +5,26 @@
 @section('plugins.DatatablesPlugin', true)
 
 @section('content_header')
-<h1 class="m-0 text-dark">Pesanan
-    <a href="/home" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-circle-left"></i> Back</a>
-        <button id="frm-bayar" class="btn bg-gradient-warning btn-sm">
-            <i class="fas fa-file-invoice-dollar"></i> Total Bayar Rp. <span id="total-bayar"></span>
-        </button>
-
-
-</h1>
+<div class="row">
+    <div class="col-4 col-auto mr-auto">
+        <h1 class="m-0 text-dark">Pesanan</h1>        
+    </div>
+    <div class="col-6 col-auto">
+        <div class="input-group input-group-sm mb-3">
+            <a href="/home" class="btn bg-gradient-danger btn-sm"><i class="fas fa-chevron-circle-left"></i> Back</a>
+                <select class="custom-select form-control-border form-control-sm border-width-2" 
+                id="meja-select" autocomplete="off">
+                    <option selected="" value="">Pilih Meja</option>
+                    @foreach($mejas as $meja)
+                        <option value="{{$meja->code}}">{{$meja->code}}</option>
+                    @endforeach
+                  </select>
+                <button id="frm-bayar" class="btn bg-gradient-warning btn-sm">
+                    <i class="fas fa-file-invoice-dollar"></i> Total Bayar Rp. <span id="total-bayar"></span>
+                </button>
+        </div>
+    </div>
+</div>
 
 @stop
 
@@ -24,6 +36,7 @@
                 {{-- Setup data for datatables --}}
                     @php
                     $heads = [
+                        '#',
                         'Nama',
                         ['label' => 'Harga', 'width' => 10],
                         ['label' => 'Jumlah', 'width' => 10],
@@ -63,6 +76,20 @@
 
 @section('js')
     <script>
+        let ajaxBayar = function(d) {
+            $.ajax({
+                url:'/menu/bayar',
+                method:'POST',
+                dataType: 'json',
+                data:{
+                        "data":JSON.stringify(d)
+                },
+            }).done(function(a){
+                console.log(a);
+            }).fail(function(error) {
+                console.log(error.statusText)
+            })
+        }
         let btnDelete = function(a) {
             return `<button class="btn btn-xs btn-default text-danger mx-1 shadow delete-order" title="Delete">
                         <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -80,7 +107,7 @@
             {
                 for (y of cc) {
                     harga = harga+y.harga;
-                    dataSet.push([y.nama,y.harga,y.jml_order,btnDelete(y.id)])
+                    dataSet.push([y.id,y.nama,y.harga,y.jml_order,btnDelete(y.id)])
                 }
                 $('#total-bayar').html(harga)
             }
@@ -114,12 +141,24 @@
             } );
 
             $('#frm-bayar').on('click',function(){
-                let data = table
-                            .rows()
-                            .data();
-                data.map(function(a){
-                    console.log(a)
-                })
+                let dataRow = table.rows().data();
+                const meja = $('#meja-select').val();
+                    if(meja != '')
+                    {
+                        f = [];
+                        dataRow.map((a)=>{
+                            let b = {}
+                            b.products_id = a[0];
+                            b.meja = meja;
+                            b.nama = a[1];
+                            b.harga = a[2];
+                            b.jumlah = a[3];
+                            f.push(b)
+                        })
+                        
+                       ajaxBayar(f)
+                    }
+                    
             })
         })
 

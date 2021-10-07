@@ -5,7 +5,7 @@
 namespace App\Libs;
 
 use App\Libs\Pesanan;
-
+use App\Libs\MejaData;
 trait LibTrait
 {
     public function getCategory()
@@ -32,5 +32,15 @@ trait LibTrait
     {
         $p = new Pesanan;
         return $p->get_menu_by_category($category);
+    }
+
+    public function all_meja()
+    {
+        return MejaData::all_meja();
+    }
+    public function orderan($order)
+    {
+        $j = json_decode($order);
+        return Pesanan::set_orderan($j);
     }
 }

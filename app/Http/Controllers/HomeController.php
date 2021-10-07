@@ -38,6 +38,11 @@ class HomeController extends Controller
     }
     public function lihat_pesanan()
     {
-        return view('lihat-pesanan');
+        $mejas = $this->all_meja();
+        return view('lihat-pesanan',compact('mejas'));
+    }
+    public function bayar(Request $request)
+    {
+        $this->orderan($request->data);
     }
 }
