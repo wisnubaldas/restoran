@@ -1,5 +1,24 @@
 ## Restoran
-
+### Install
+- Clone repo `` git clone https://github.com/wisnubaldas/restoran.git ``
+- Jalankan perintah 
+	```bash
+	composer install
+	npm install
+	```
+- Bikin koneksi 
+	```bash
+	cp .env.example .env
+	```
+- Bikin seed data sample
+	```bash
+	php artisan migrate --seed
+	php artisan optimize
+	```
+- Jalankan server
+	```bash
+	php artisan serve
+	```
 ## Answer
 > Aplikasi Survey Produk Baru Keramik
 - Petugas survey membuat survey produk baru
