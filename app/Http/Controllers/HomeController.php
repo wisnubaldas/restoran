@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Lib\LibTrait;
+use App\Libs\LibTrait;
 class HomeController extends Controller
 {
     /**

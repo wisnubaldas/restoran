@@ -15,10 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('customer_id');
+            $table->string('no_pesan');
             $table->integer('pelayan_id');
             $table->dateTime('start');
-            $table->string('status');
+            $table->dateTime('finish')->nullable();
+            $table->string('status')->default('pesanan');
             $table->string('meja');
             $table->string('rating')->nullable();
             $table->string('komentar')->nullable();

@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('discount')->nullable();
             $table->string('foto')->default('/default-makanan.jpg');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
