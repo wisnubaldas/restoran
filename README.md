@@ -1,4 +1,9 @@
 ## Restoran
+### Screen Shoot
+![jenis_makanan](https://user-images.githubusercontent.com/10908214/136309768-8302d751-f07c-4b86-b50a-62cdd39e819a.png)
+![menu](https://user-images.githubusercontent.com/10908214/136309794-953ec4b7-4315-4648-8854-7b0b6ea5f53d.png)
+
+
 ### Install
 - Clone repo `` git clone https://github.com/wisnubaldas/restoran.git ``
 - Jalankan perintah 
