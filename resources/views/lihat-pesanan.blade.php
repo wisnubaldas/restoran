@@ -7,7 +7,7 @@
 @section('content_header')
 <div class="row">
     <div class="col-4 col-auto mr-auto">
-        <h1 class="m-0 text-dark">Pesanan</h1>        
+        <h1 class="m-0 text-dark">Total Rp. <span id="total-bayar" class="text-danger"></span></h1>        
     </div>
     <div class="col-6 col-auto">
         <div class="input-group input-group-sm mb-3">
@@ -20,7 +20,7 @@
                     @endforeach
                   </select>
                 <button id="frm-bayar" class="btn bg-gradient-warning btn-sm">
-                    <i class="fas fa-file-invoice-dollar"></i> Total Bayar Rp. <span id="total-bayar"></span>
+                    <i class="fas fa-file-invoice-dollar"></i> Bayar 
                 </button>
         </div>
     </div>
@@ -39,6 +39,7 @@
                         '#',
                         'Nama',
                         ['label' => 'Harga', 'width' => 10],
+                        ['label' => 'Total', 'width' => 10],
                         ['label' => 'Jumlah', 'width' => 10],
                         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
                     ];
@@ -76,7 +77,28 @@
 
 @section('js')
     <script>
-        let ajaxBayar = function(d) {
+        // sum array 
+        Array.prototype.sum = function (prop) {
+            var total = 0
+            for ( var i = 0, _len = this.length; i < _len; i++ ) {
+                total += this[i][prop]
+            }
+            return total
+        }
+
+        // delete array 
+        Array.prototype.delete = function (prop) {
+            
+            return this.map(a => {
+                if(a[Object.keys(prop)[0]] == prop[Object.keys(prop)[0]])
+                {
+                    delete a;
+                }else{
+                    return a;
+                }
+            }).filter(Boolean)
+        }
+        let ajaxBayar = function(d,dtTbl) {
             $.ajax({
                 url:'/menu/bayar',
                 method:'POST',
@@ -85,7 +107,10 @@
                         "data":JSON.stringify(d)
                 },
             }).done(function(a){
-                console.log(a);
+                // console.log(a);
+                sessionStorage.removeItem('order')
+                alert('Terimakasih sudah makan disini')
+                return window.location = '/home';
             }).fail(function(error) {
                 console.log(error.statusText)
             })
@@ -107,7 +132,7 @@
             {
                 for (y of cc) {
                     harga = harga+y.harga;
-                    dataSet.push([y.id,y.nama,y.harga,y.jml_order,btnDelete(y.id)])
+                    dataSet.push([y.id,y.nama,y.harga,(Number(y.harga)*Number(y.jml_order)),y.jml_order,btnDelete(y.id)])
                 }
                 $('#total-bayar').html(harga)
             }
@@ -122,41 +147,35 @@
                 lengthChange:false,
                 paging:false,
                 destroy: true,
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: 'Reload',
-                        action: function ( e, dt, node, config ) {
-                            dt.ajax.reload();
-                        }
-                    }
-                ]
             } );
 
             $('#table2 tbody').on( 'click', '.delete-order', function () {
+                let dtRow = table.row( $(this).parents('tr') ).data();
+                let sOrder = sessionStorage.getItem("order");
+                let updateOrder = JSON.parse(sOrder);
+                const ok = updateOrder.delete({id:dtRow[0]})
+                // console.log(updateOrder)
+                sessionStorage.setItem("order", JSON.stringify(ok));
                 table
                     .row( $(this).parents('tr') )
                     .remove()
                     .draw();
+
             } );
 
             $('#frm-bayar').on('click',function(){
                 let dataRow = table.rows().data();
+
                 const meja = $('#meja-select').val();
+                const cc = JSON.parse(sessionStorage.getItem('order'))
                     if(meja != '')
                     {
-                        f = [];
-                        dataRow.map((a)=>{
-                            let b = {}
-                            b.products_id = a[0];
-                            b.meja = meja;
-                            b.nama = a[1];
-                            b.harga = a[2];
-                            b.jumlah = a[3];
-                            f.push(b)
+                        cc.map((a)=>{
+                            a.meja = meja
+                            a.total = (Number(a.harga)*Number(a.jml_order))
+                            return a
                         })
-                        
-                       ajaxBayar(f)
+                       ajaxBayar(cc)
                     }
                     
             })

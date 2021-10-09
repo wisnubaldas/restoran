@@ -24,6 +24,22 @@
 	```bash
 	php artisan serve
 	```
+- User dan Password login
+	Administrator
+	```bash
+	email: admin@admin.com
+	pass: password
+	```
+	Kasir
+	```bash
+	email: kasir@kasir.com
+	pass: password
+	```
+	Pelayan
+	```bash
+	email: pelayan@pelayan.com
+	pass: password
+	```
 ## Answer
 > Aplikasi Survey Produk Baru Keramik
 - Petugas survey membuat survey produk baru

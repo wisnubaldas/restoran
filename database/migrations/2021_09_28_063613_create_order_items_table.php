@@ -18,7 +18,10 @@ class CreateOrderItemsTable extends Migration
             $table->integer('orders_id');
             $table->integer('products_id');
             $table->string('jumlah_pesan');
+            $table->string('meja');
             $table->string('harga');
+            $table->string('total');
+            $table->boolean('void')->default(0);
             $table->timestamps();
         });
     }

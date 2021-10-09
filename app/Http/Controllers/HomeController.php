@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Libs\LibTrait;
+
 class HomeController extends Controller
 {
     /**
@@ -44,5 +45,14 @@ class HomeController extends Controller
     public function bayar(Request $request)
     {
         $this->orderan($request->data);
+        return ['data'=>'sukses pesan'];
+    }
+    public function status_pesan(Request $request)
+    {
+        // return $this->all_order();
+        if ($request->ajax()) {
+            return $this->all_order();
+        }
+        return view('status-pesan');
     }
 }

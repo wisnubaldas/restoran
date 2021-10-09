@@ -35,6 +35,20 @@ class EventServiceProvider extends ServiceProvider
                 'text' => 'Home',
                 'url' => '/home',
             ]);
+            $event->menu->add([
+                'text' => 'Status Pesanan',
+                'url' => '/status-pesan',
+            ]);
+            $event->menu->add([
+                'text' => 'Bayar Pesanan',
+                'url' => '/proses-pesanan/bayar',
+                'can'=>''
+            ]);
+            $event->menu->add([
+                'text' => 'Proses Pesanan',
+                'url' => '/proses-pesanan',
+                'can'=>''
+            ]);
         });   
     }
 }

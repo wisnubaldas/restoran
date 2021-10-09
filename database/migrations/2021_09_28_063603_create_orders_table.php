@@ -21,7 +21,6 @@ class CreateOrdersTable extends Migration
             $table->dateTime('start');
             $table->dateTime('finish')->nullable();
             $table->string('status')->default('pesanan');
-            $table->string('meja');
             $table->string('rating')->nullable();
             $table->string('komentar')->nullable();
             $table->timestamps();
