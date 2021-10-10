@@ -30,6 +30,10 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
             // Add some items to the menu...
+            $event->menu->add([
+                'text' => 'Dashboard',
+                'url' => '/dashboard',
+            ]);
             $event->menu->add('MAIN NAVIGATION');
             $event->menu->add([
                 'text' => 'Home',

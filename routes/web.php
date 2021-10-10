@@ -18,9 +18,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index']);
 Route::group(['middleware' => ['role:admin|pelayan']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/menu/{category}',[App\Http\Controllers\HomeController::class, 'menu']);
     Route::get('/menu/lihat-pesanan',[App\Http\Controllers\HomeController::class, 'lihat_pesanan']);
     Route::post('/menu/bayar',[App\Http\Controllers\HomeController::class, 'bayar']);

@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'AdminLTE')
+@section('plugins.Toastr', true)
 
 @section('content_header')
 <h1 class="m-0 text-dark">Menu Pesanan
@@ -42,7 +43,8 @@
                             <div class="input-group mb-3">
                                 <input type="number" id="jml-pesan" value="0" 
                                     data-id_item="{{$v->id}}" data-nama="{{$v->name}}" data-harga="{{$v->price}}"
-                                    class="form-control rounded-0" placeholder="Jumlah pesanan">
+                                    class="form-control rounded-0" min="0" max="100" 
+                                    placeholder="Jumlah pesanan">
                                 <span class="input-group-append">
                                   <button type="button" class="btn btn-info btn-flat btn-pesan">Pesan {{$v->name}}</button>
                                 </span>
@@ -67,7 +69,9 @@
                 $('.badge-light').html(cc.length)
             }
         }
-
+        let notifOrder = (a) => {
+            toastr.success(a.nama+' pesan :'+a.jml_order)
+        }
         $(document).ready(function(){
             cekOrder()
 
@@ -87,11 +91,16 @@
                     {
                         sessionStorage.setItem("order", JSON.stringify([orderan]));
                         cekOrder()
+                        order.val(0);
+                        notifOrder(orderan)
                     }else{
                         obj = JSON.parse(sessOrder);
                         obj.push(orderan)
                         sessionStorage.setItem("order", JSON.stringify(obj));
                         cekOrder()
+                        order.val(0);
+                        notifOrder(orderan)
+                        
                     }
                 }
             })
