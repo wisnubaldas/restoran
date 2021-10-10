@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('login', [App\Http\Controllers\API\UserController::class, 'login']);
-Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::post('details', [App\Http\Controllers\API\UserController::class, 'detail']);
+    Route::get('all_product', [MenuController::class, 'all_menu']);
 });

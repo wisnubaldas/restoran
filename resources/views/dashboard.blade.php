@@ -33,7 +33,7 @@
             // Update data.
             let rep = Math.floor(1000 * Math.random());
             let idx = rep < 100 ? 0 : (rep > 500 ? 2 : 1);
-            let text = 'Reputation - ' + ['Basic', 'Silver', 'Gold'][idx];
+            let text = 'Jumlah Pesanan';
             let icon = 'fas fa-medal ' + ['text-primary', 'text-light', 'text-warning'][idx];
             let url = ['url1', 'url2', 'url3'][idx];
 
@@ -43,7 +43,7 @@
 
         let startUpdateProcedure = () =>
         {
-            toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+            // toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
             // Simulate loading procedure.
             sBox.toggleLoading();
             // Wait and update the data.
