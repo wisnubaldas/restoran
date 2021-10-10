@@ -44,8 +44,10 @@
 	```bash
 	/api/login
 	/api/all_product
-	
 	```
+    ![Jepretan Layar 2021-10-10 pukul 21 45 50](https://user-images.githubusercontent.com/10908214/136701475-a8a859b6-0ca1-4d08-acbc-3bb4aea47ed4.png)
+    ![Jepretan Layar 2021-10-10 pukul 21 58 24](https://user-images.githubusercontent.com/10908214/136701484-dbbd81b1-ad14-43e8-ad89-6107553bb75f.png)
+
 ## Answer
 > Aplikasi Survey Produk Baru Keramik
 - Petugas survey membuat survey produk baru
