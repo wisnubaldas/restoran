@@ -40,6 +40,12 @@
 	email: pelayan@pelayan.com
 	pass: password
 	```
+- Api End point
+	```bash
+	/api/login
+	/api/all_product
+	
+	```
 ## Answer
 > Aplikasi Survey Produk Baru Keramik
 - Petugas survey membuat survey produk baru
