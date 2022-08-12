@@ -10,7 +10,9 @@
         <a href="/menu/lihat-pesanan" class="btn bg-gradient-success btn-sm"><i class="fas fa-hamburger"></i> 
             Liat Pesanan 
             <span class="badge badge-light">0</span>
+
         </a>
+        <a href="/home" class="btn-add bg-gradient- btn-sm"><i class="add"></i> Tambah Menu Makanan</a>
     </div>
 </h1>
 

@@ -46,13 +46,17 @@ class EventServiceProvider extends ServiceProvider
             $event->menu->add([
                 'text' => 'Bayar Pesanan',
                 'url' => '/proses-pesanan/bayar',
-                'can'=>''
+                'can' => ''
             ]);
             $event->menu->add([
                 'text' => 'Proses Pesanan',
                 'url' => '/proses-pesanan',
-                'can'=>''
+                'can' => ''
             ]);
-        });   
+            $event->menu->add([
+                'text' => 'Tambah Menu',
+                'url' => '/tambah_menu',
+            ]);
+        });
     }
 }

@@ -18,23 +18,22 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index']);
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
 Route::group(['middleware' => ['role:admin|pelayan']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/menu/{category}',[App\Http\Controllers\HomeController::class, 'menu']);
-    Route::get('/menu/lihat-pesanan',[App\Http\Controllers\HomeController::class, 'lihat_pesanan']);
-    Route::post('/menu/bayar',[App\Http\Controllers\HomeController::class, 'bayar']);
-    Route::get('/status-pesan',[App\Http\Controllers\HomeController::class, 'status_pesan']);
+    Route::get('/menu/{category}', [App\Http\Controllers\HomeController::class, 'menu']);
+    Route::get('/menu/lihat-pesanan', [App\Http\Controllers\HomeController::class, 'lihat_pesanan']);
+    Route::post('/menu/bayar', [App\Http\Controllers\HomeController::class, 'bayar']);
+    Route::get('/status-pesan', [App\Http\Controllers\HomeController::class, 'status_pesan']);
+    Route::get('/tambah_menu', [App\Http\Controllers\ProductController::class, 'index'])->name('tambah_menu');
+    Route::get('/create_menu_makanan', [App\Http\Controllers\ProductController::class, 'create_menu_makanan'])->name('create_menu_makanan');
+    Route::post('/tambah_menu', [App\Http\Controllers\ProductController::class, 'store'])->name('tambahmenu');
 });
-    
+
 Route::group(['middleware' => ['role:admin|kasir']], function () {
     Route::get('/proses-pesanan/bayar', [App\Http\Controllers\KasirController::class, 'bayarPesanan']);
     Route::get('/proses-pesanan/bayar/cash/{nps}', [App\Http\Controllers\KasirController::class, 'bayarCash']);
     Route::get('/proses-pesanan', [App\Http\Controllers\KasirController::class, 'index']);
     Route::get('/proses-pesanan/delete/{id}', [App\Http\Controllers\KasirController::class, 'delete_pesanan']);
     Route::get('/proses-pesanan/selesai/{id}', [App\Http\Controllers\KasirController::class, 'pesananSelesai']);
-
 });
-
-
-
